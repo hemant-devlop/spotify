@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 
 const Footer = () => {
   const { currentSong, isPlaying, allSongs, setCurrentSong } = useContext(SpotifyContext);
-  console.log(currentSong)
+  // console.log(currentSong)
   const [favorite, setFavorite] = useState(currentSong?.isLiked);
   const [play, setPlay] = useState(isPlaying);
   const audioRef = useRef(null)
