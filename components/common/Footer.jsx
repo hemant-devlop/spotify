@@ -115,31 +115,31 @@ const Footer = () => {
   return (
     <footer>
       <div className='bg-[#000000] text-white p-2 flex h-20'>
-        <div className='w-80 flex gap-8'>
+        <div className='max-w-80 flex gap-8 order-3 sm:order-1'>
           <div className='ms-2 flex gap-4'>
-            <div>
+            <div className='flex justify-center items-center'>
               <Image src={currentSong?.coverImage}
                 height={1000}
                 width={1000}
-                className='size-15 rounded'
+                className='size-12 md:size-15 rounded'
                 priority
                 alt='img' />
             </div>
-            <div className='flex justify-center items-center'>
+            <div className='hidden md:flex justify-center items-center'>
               <div>
                 <p className='font-regular'>{currentSong?.title}</p>
                 <span className='font-regular text-xs'>{currentSong?.artist}</span>
               </div>
             </div>
           </div>
-          <div className='my-auto'>
+          <div className='hidden md:block my-auto'>
             <span onClick={() => setFavorite(!favorite)} className='transition duration-700 cursor-pointer'>
               {!currentSong.isLiked ? <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="#b3b3b3" fillRule="evenodd" clipRule="evenodd"><path d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m10-8a8 8 0 1 0 0 16a8 8 0 0 0 0-16" /><path d="M13 7a1 1 0 1 0-2 0v4H7a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2h-4z" /></g></svg> :
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#1ed760" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8z" /></svg>}
             </span>
           </div>
         </div>
-        <div className='flex flex-col flex-1 '>
+        <div className='flex flex-col flex-1 order2 '>
           <div className='flex items-center justify-center'>
             <div className='space-x-4'>
               <button className='cursor-pointer'>
@@ -200,7 +200,7 @@ const Footer = () => {
             <div className='font-regular text-xs'>{durationShow}</div>
           </div>
         </div>
-        <div className='w-70'>
+        <div className='hidden md:block w-70'>
 
         </div>
       </div>

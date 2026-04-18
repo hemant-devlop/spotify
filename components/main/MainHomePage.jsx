@@ -8,6 +8,7 @@ import Image from 'next/image'
 const MainHomePage = () => {
   const spotifyCtx = useContext(SpotifyContext)
   const [songs, setSongs] = useState([])
+  const [list, setList] = useState(true)
   const [isActive, setIsActive] = useState(0)
   const [box1, setBox1] = useState(false)
   const [box1w, setBox1w] = useState(280)
@@ -135,8 +136,63 @@ const MainHomePage = () => {
 
   const rightsideBar = ['Playlists', 'Artists', 'Albums', 'Podcats&Shows', 'Events']
   return (
-    <div className='h-[calc(100vh-10rem)]'>
-      <div className='flex bg-black gap-1 px-1.5 h-full'>
+    <div className=' h-[calc(100vh-10rem)]'>
+
+      <div className='md:hidden bg-[#121212] p-4'>
+        {spotifyCtx.currentSong ? (
+          <div className='text-white relative overflow-hidden'>
+            <div className='flex flex-col items-center mb-6'>
+              <Image
+                src={spotifyCtx.currentSong.coverImage}
+                alt={spotifyCtx.currentSong.title}
+                height={300}
+                width={300}
+                className='w-64 h-64 rounded-lg shadow-2xl mb-4'
+              />
+              <h1 className='text-2xl font-bold mb-2 text-center font-regular'>{spotifyCtx.currentSong.title}</h1>
+              <p className='text-gray-400 mb-4 text-center font-regular'>{spotifyCtx.currentSong.artist}</p>
+              <button className='outline hover:bg-[#000000d0] text-white px-6 py-2 rounded-full font-bold mb-4'>
+                Like
+              </button>
+            </div>
+            <div className={`absolute shadow-xl bottom-0 transform transition-all duration-500 bg-[#121212a0] rounded-xl  ${list?'translate-y-0':'translate-y-100'}`}>
+              <div className='flex justify-between items-center'>
+                <h2 className='text-xl font-bold mb-4'>Next Songs</h2>
+                <span onClick={()=>setList(false)} className='p-4 font-regular cursor-pointer'>X</span>
+              </div>
+              <div className='space-y-1'>
+                {songs.slice(0, 5).map((song, index) => (
+                  <div
+                    key={song.id}
+                    onClick={() => handleSetSong(song.id)}
+                    className='flex items-center gap-3 p-2 rounded-lg hover:bg-[#1e1e1e] cursor-pointer'
+                  >
+                    <img
+                      src={song.coverImage}
+                      alt={song.title}
+                      className='w-12 h-12 rounded'
+                    />
+                    <div>
+                      <p className='text-white font-medium'>{song.title}</p>
+                      <p className='text-gray-400 text-sm font-regular'>{song.artist}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+           <div onClick={()=>setList(!list)} className='absolute left-0 z-99 -bottom-2 cursor-pointer '>
+            <span className='fill-white hover:fill-[#808080]'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fillRule="evenodd" d="M2.25 6A.75.75 0 0 1 3 5.25h18a.75.75 0 0 1 0 1.5H3A.75.75 0 0 1 2.25 6m0 4A.75.75 0 0 1 3 9.25h18a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75m0 4a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75m14.762.43a.75.75 0 0 1 .976 0l3.5 3a.75.75 0 1 1-.976 1.14L17.5 15.987l-3.012 2.581a.75.75 0 1 1-.976-1.138zM2.25 18a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75" clipRule="evenodd"/></svg>
+            </span>
+           </div>
+          </div>
+        ) : (
+          <div className='text-gray-400 text-center h-full flex items-center justify-center'>
+            Select a song to play
+          </div>
+        )}
+      </div>
+      <div className='hidden md:flex bg-black gap-1 px-1.5 h-full'>
         <div ref={boxRef1} className={`bg-[#121212] group w-76 relative rounded-lg h-full overflow-y-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
           <div ref={rightRef} className='h-[95%] transform -translate-y-1/2 z-99  top-1/2 w-0.5 absolute right-0 hover:bg-white transition duration-100 hover:cursor-grab'></div>
           <div className='text-white bg-[#121212] shadow-2xl w-full rounded-t-lg sticky top-0 z-20'>
