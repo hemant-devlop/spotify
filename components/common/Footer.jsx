@@ -17,7 +17,7 @@ const Footer = () => {
   const [loop, setLoop] = useState(false);
   const progress = (currenTime / duration) * 100
   const handlePlay = () => {
-    console.log(audioRef.current.duration)
+    // console.log(audioRef.current.duration)
     if (audioRef) {
       setPlay(!play)
       audioRef.current.play()
@@ -139,7 +139,7 @@ const Footer = () => {
             </span>
           </div>
         </div>
-        <div className='flex flex-col flex-1 order2 '>
+        <div className='flex flex-col flex-1 order-2 '>
           <div className='flex items-center justify-center'>
             <div className='space-x-4'>
               <button className='cursor-pointer'>
@@ -200,7 +200,7 @@ const Footer = () => {
             <div className='font-regular text-xs'>{durationShow}</div>
           </div>
         </div>
-        <div className='hidden md:block w-70'>
+        <div className='hidden md:block w-70 order-3'>
 
         </div>
       </div>

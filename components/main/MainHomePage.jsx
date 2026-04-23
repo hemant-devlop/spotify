@@ -8,7 +8,7 @@ import Image from 'next/image'
 const MainHomePage = () => {
   const spotifyCtx = useContext(SpotifyContext)
   const [songs, setSongs] = useState([])
-  const [list, setList] = useState(true)
+  const [list, setList] = useState(false)
   const [isActive, setIsActive] = useState(0)
   const [box1, setBox1] = useState(false)
   const [box1w, setBox1w] = useState(280)
@@ -138,10 +138,10 @@ const MainHomePage = () => {
   return (
     <div className=' h-[calc(100vh-10rem)]'>
 
-      <div className='md:hidden bg-[#121212] p-4'>
+      <div className='md:hidden bg-[#121212] p-4 h-full'>
         {spotifyCtx.currentSong ? (
-          <div className='text-white relative overflow-hidden'>
-            <div className='flex flex-col items-center mb-6'>
+          <div className='text-white relative h-full overflow-hidden'>
+            <div className='flex flex-col mt-40 items-center mb-6'>
               <Image
                 src={spotifyCtx.currentSong.coverImage}
                 alt={spotifyCtx.currentSong.title}
